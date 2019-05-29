@@ -1,0 +1,6 @@
+spring:
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    password: 123456
+    database: 0  # \u6307\u5B9A\u5B58\u50A8\u7684\u6570\u636E\u662F\u54EA\u4E2A\u5E93
