@@ -19,6 +19,11 @@ public class PermissionController {
     public String test1() {
         return "说明你有docker权限";
     }
+    @RequestMapping("/custom")
+    @PreAuthorize("@testService.check('user')")
+    public String test0() {
+        return "说明你有自定义权限";
+    }
 
     @PreAuthorize("hasRole('ROLE_JAVA')")
     @RequestMapping("/java")
