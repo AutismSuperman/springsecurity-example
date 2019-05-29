@@ -23,6 +23,8 @@
         <module>security-form</module>
         <module>security-jwt</module>
         <module>security-code</module>
+        <module>security-weixin</module>
+        <module>security-permission</module>
     </modules>
 
     <dependencies>
