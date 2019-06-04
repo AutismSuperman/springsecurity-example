@@ -20,9 +20,9 @@
     security的鉴权里面有自定义鉴权和注解鉴权的例子
 6.  security-rememberme  
     记住我功能的实现
-7.  security-sso-oauth2 
+7.  security-sso-oauth2  
     基于`spring-cloud-starter-oauth2` 的单点登录
-8.  security-weixin 
+8.  security-weixin  
     TODO 整合微信登陆
     
     
