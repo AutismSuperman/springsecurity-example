@@ -25,6 +25,7 @@
         <module>security-code</module>
         <module>security-weixin</module>
         <module>security-permission</module>
+        <module>security-oauth2</module>
     </modules>
 
     <dependencies>
