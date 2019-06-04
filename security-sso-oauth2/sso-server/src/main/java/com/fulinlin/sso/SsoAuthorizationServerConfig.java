@@ -63,7 +63,8 @@ public class SsoAuthorizationServerConfig extends AuthorizationServerConfigurerA
     // tokenKey 就是对 JWT进行签名的key，即imooc
     @Override
     public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
-        security.tokenKeyAccess("isAuthenticated()");
+        security.tokenKeyAccess("permitAll()");
+//        security.tokenKeyAccess("isAuthenticated()");
     }
 
 
