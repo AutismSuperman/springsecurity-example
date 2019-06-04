@@ -15,13 +15,13 @@
 3.  security-jwt          
     使用jwt代替原有的session并整合`reids`作为jwt的存储
 4.  security-oauth2  
-    整合oauth2的password模式适合
+    整合oauth2的`password`模式适合
 5.  security-permission  
     security的鉴权里面有自定义鉴权和注解鉴权的例子
 6.  security-rememberme  
     记住我功能的实现
 7.  security-sso-oauth2  
-    基于`spring-cloud-starter-oauth2` 的单点登录
+    基于oauth2的`authorization_code`模式的单点登录
 8.  security-weixin  
     TODO 整合微信登陆
     
