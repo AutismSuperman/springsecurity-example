@@ -31,7 +31,6 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
     }
 
 
-
     @Override
     public void configure(HttpSecurity http) throws Exception {
         //表单登录 方式
@@ -46,7 +45,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
         http.authorizeRequests()
                 .antMatchers("/oauth/token").permitAll()
                 .anyRequest()
-                .permitAll()
+                .authenticated()
                 .and()
                 //关闭跨站请求防护
                 .csrf().disable();
@@ -57,17 +56,4 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
         super.configure(resources);
     }
 
-    //    @Override
-//    protected void configure(HttpSecurity http) throws Exception {
-//        http.formLogin().permitAll();
-////        http.logout().permitAll();
-////        http
-////                .authorizeRequests()
-////                .antMatchers("/oauth/token").permitAll()
-////                .anyRequest()
-////                .permitAll()
-////                .and()
-////                //关闭跨站请求防护
-////                .csrf().disable();
-////    }
 }
