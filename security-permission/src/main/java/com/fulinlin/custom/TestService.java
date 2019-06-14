@@ -1,5 +1,7 @@
 package com.fulinlin.custom;
 
+import org.springframework.security.core.Authentication;
+
 /**
  * @program: SpringSecurity
  * @author: fulin

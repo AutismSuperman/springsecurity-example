@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 @Service("testService")
 public class TestServiceImpl implements TestService {
 
-    public boolean check(String a) {
+    public boolean check( String a) {
         System.out.println("进入了自定义的匹配器" + a);
         return true;
     }

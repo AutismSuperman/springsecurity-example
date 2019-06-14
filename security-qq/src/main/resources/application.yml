@@ -1,4 +1,9 @@
 spring:
+  datasource:
+    username: root
+    password: 123456
+    driver-class-name: org.mariadb.jdbc.Driver
+    url: jdbc:mariadb://127.0.0.1:3306/test
   freemarker:
     request-context-attribute: request
     suffix: .html
@@ -14,3 +19,4 @@ spring:
       name: user
       password: admin
       roles: user, admin
+
