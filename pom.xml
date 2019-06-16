@@ -25,11 +25,10 @@
         <module>security-form</module>
         <module>security-jwt</module>
         <module>security-code</module>
-        <module>security-weixin</module>
         <module>security-permission</module>
         <module>security-oauth2</module>
         <module>security-sso-oauth2</module>
-        <module>security-qq</module>
+        <module>security-social</module>
     </modules>
 
     <dependencies>
