@@ -54,7 +54,7 @@ public class QQImpl extends AbstractOAuth2ApiBinding implements QQ {
     }
 
     @Override
-    public QQUserInfo getUserInfo(String openId) {
+    public QQUserInfo getUserInfo() {
         //补全获取userinfo的url
         String url = String.format(URL_GET_USERINFO, appId, openId);
         // 获取用户信息

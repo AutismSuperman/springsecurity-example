@@ -2,7 +2,6 @@ package com.fulinlin.config;
 
 import com.fulinlin.properties.QQProperties;
 import com.fulinlin.qq.factory.QQConnectionFactory;
-import com.fulinlin.qq.support.SocialAuthenticationFilterPostProcessor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,8 +12,10 @@ import org.springframework.social.config.annotation.EnableSocial;
 import org.springframework.social.config.annotation.SocialConfigurerAdapter;
 import org.springframework.social.connect.ConnectionFactory;
 import org.springframework.social.connect.ConnectionFactoryLocator;
+import org.springframework.social.connect.ConnectionSignUp;
 import org.springframework.social.connect.UsersConnectionRepository;
 import org.springframework.social.connect.jdbc.JdbcUsersConnectionRepository;
+import org.springframework.social.connect.web.ProviderSignInUtils;
 import org.springframework.social.security.SpringSocialConfigurer;
 
 import javax.sql.DataSource;
@@ -34,8 +35,8 @@ public class SocialConfig extends SocialConfigurerAdapter {
     @Autowired
     private DataSource dataSource;
 
-    @Autowired
-    private SocialAuthenticationFilterPostProcessor socialAuthenticationFilterPostProcessor;
+    @Autowired(required = false)
+    private ConnectionSignUp connectionSignUp;
 
     /**
      * 关联用户登陆的持久化
@@ -45,7 +46,18 @@ public class SocialConfig extends SocialConfigurerAdapter {
      */
     @Override
     public UsersConnectionRepository getUsersConnectionRepository(ConnectionFactoryLocator connectionFactoryLocator) {
-        return new JdbcUsersConnectionRepository(dataSource, connectionFactoryLocator, Encryptors.noOpText());
+        //TextEncryptor 这个参数是向数据库插入的时候做加密 这里不做加密
+        JdbcUsersConnectionRepository jdbcUsersConnectionRepository = new JdbcUsersConnectionRepository(dataSource, connectionFactoryLocator, Encryptors.noOpText());
+        /* 增加前缀假设需要 */
+        //jdbcUsersConnectionRepository.setTablePrefix("fulin_");
+        //这里的 connectionSignUp 是做自动登录用了
+        //用户只需要实现 connectionSignUp 接口然后里面做自动向数据库
+        //插入用户的逻辑并且返回 用户的唯一标识即可
+        //这里作为可配置的
+        if (connectionSignUp != null) {
+            jdbcUsersConnectionRepository.setConnectionSignUp(connectionSignUp);
+        }
+        return jdbcUsersConnectionRepository;
     }
 
     /**
@@ -74,10 +86,30 @@ public class SocialConfig extends SocialConfigurerAdapter {
         // SocialAuthenticationFilter过滤器默认拦截的请求是/auth开头，这里获取自己配置的处理路径/login
         //然后你的认证地址就是 /login/qq  这个qq就是你设置的providerId
         MySpringSocialConfigurer configurer = new MySpringSocialConfigurer("/login");
-        //登陆的地址
-        configurer.signupUrl("/qqLogin");
-        configurer.setSocialAuthenticationFilterPostProcessor(socialAuthenticationFilterPostProcessor);
+        // 如果实现了connectionSignUp 就不会跳到 注册页面
+        // 如果找不到用户 就跳到登陆页面
+        configurer.signupUrl("/registered");
         return configurer;
+    }
+
+
+    /**
+     * 用来处理注册流程的工具类
+     * 用于非自动注册
+     * 拿到当前社交登陆的用户信息	providerSignInUtils.getConnectionFromSession(rquuest)
+     * 然后执行绑定或者注册 就是做数据库增删改查
+     * 然后在调用providerSignInUtils.doPostSignUp(rquuest); 执行后续的登陆逻辑
+     * 就是SocialUserDetailsService 的 loadUserByUserId 方法
+     * 完成整个认证流程
+     *
+     * @param connectionFactoryLocator
+     * @return
+     */
+    @Bean
+    public ProviderSignInUtils providerSignInUtils(ConnectionFactoryLocator connectionFactoryLocator) {
+        return new ProviderSignInUtils(connectionFactoryLocator,
+                getUsersConnectionRepository(connectionFactoryLocator)) {
+        };
     }
 
 }

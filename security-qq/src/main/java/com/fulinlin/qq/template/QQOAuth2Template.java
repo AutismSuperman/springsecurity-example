@@ -15,11 +15,10 @@ import java.nio.charset.Charset;
  * @create: 2019-06-14 15:56
  **/
 public class QQOAuth2Template extends OAuth2Template {
+
     public QQOAuth2Template(String clientId, String clientSecret, String authorizeUrl, String accessTokenUrl) {
         super(clientId, clientSecret, authorizeUrl, accessTokenUrl);
-        /**
-         * 发请求的时候携带参数
-         */
+        //发请求的时候携带参数
         setUseParametersForClientAuthentication(true);
     }
 
@@ -43,6 +42,7 @@ public class QQOAuth2Template extends OAuth2Template {
          *
          * accessToken
          */
+        assert items != null;
         String accessToken = StringUtils.substringAfterLast(items[0], "=");
         /*
          * expiresIn

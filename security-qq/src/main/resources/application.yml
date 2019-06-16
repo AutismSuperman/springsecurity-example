@@ -1,3 +1,9 @@
+social:
+  qq:
+    appid:  1111
+    appSecret: 1111
+
+
 spring:
   datasource:
     username: root

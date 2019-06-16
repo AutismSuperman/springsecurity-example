@@ -66,7 +66,6 @@ public class AppAuthenticationSuccessHandler extends SavedRequestAwareAuthentica
         response.setHeader("Authorization", "Bearer " + token);
         response.setContentType("application/json;charset=UTF-8");
         response.getWriter().write(JSON.toJSONString(modelMap));
-
     }
 
     /**

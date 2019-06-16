@@ -3,12 +3,12 @@
  */
 package com.fulinlin.config;
 
-import com.fulinlin.qq.support.SocialAuthenticationFilterPostProcessor;
 import org.springframework.social.security.SocialAuthenticationFilter;
 import org.springframework.social.security.SpringSocialConfigurer;
 
 /**
- * 继承默认的社交登录配置，加入自定义的后处理逻辑
+ * 继承默认的社交登录配置，
+ * 加入自定义的后处理逻辑
  *
  * @author zhailiang
  *
@@ -17,7 +17,6 @@ public class MySpringSocialConfigurer extends SpringSocialConfigurer {
 
     private String filterProcessesUrl;
 
-    private SocialAuthenticationFilterPostProcessor socialAuthenticationFilterPostProcessor;
 
     public MySpringSocialConfigurer(String filterProcessesUrl) {
         this.filterProcessesUrl = filterProcessesUrl;
@@ -32,9 +31,6 @@ public class MySpringSocialConfigurer extends SpringSocialConfigurer {
         SocialAuthenticationFilter filter = (SocialAuthenticationFilter) super.postProcess(object);
         // SocialAuthenticationFilter过滤器默认拦截的请求是/auth开头，这里是修改为自己配置的
         filter.setFilterProcessesUrl(filterProcessesUrl);
-        if (socialAuthenticationFilterPostProcessor != null) {
-            socialAuthenticationFilterPostProcessor.process(filter);
-        }
         return (T) filter;
     }
 
@@ -46,13 +42,5 @@ public class MySpringSocialConfigurer extends SpringSocialConfigurer {
         this.filterProcessesUrl = filterProcessesUrl;
     }
 
-    public SocialAuthenticationFilterPostProcessor getSocialAuthenticationFilterPostProcessor() {
-        return socialAuthenticationFilterPostProcessor;
-    }
-
-    public void setSocialAuthenticationFilterPostProcessor(
-            SocialAuthenticationFilterPostProcessor socialAuthenticationFilterPostProcessor) {
-        this.socialAuthenticationFilterPostProcessor = socialAuthenticationFilterPostProcessor;
-    }
 
 }

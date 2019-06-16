@@ -13,6 +13,7 @@ import org.springframework.social.oauth2.AbstractOAuth2ServiceProvider;
  * @description
  */
 public class QQServiceProvider extends AbstractOAuth2ServiceProvider<QQ> {
+
     private String appId;
 
     /**
@@ -28,9 +29,11 @@ public class QQServiceProvider extends AbstractOAuth2ServiceProvider<QQ> {
     /**
      * 给QQOAuth2Template
      * 让QQOAuth2Template 处理 accessToke
+     * 顺便吧appId 传过来赋值
      */
-    public QQServiceProvider(String clientId, String clientSecret) {
-        super(new QQOAuth2Template(clientId, clientSecret, URL_AUTHORIZE, URL_ACCESS_TOKEN));
+    public QQServiceProvider(String appId, String appSecret) {
+        super(new QQOAuth2Template(appId, appSecret, URL_AUTHORIZE, URL_ACCESS_TOKEN));
+        this.appId = appId;
     }
 
     @Override
@@ -39,6 +42,5 @@ public class QQServiceProvider extends AbstractOAuth2ServiceProvider<QQ> {
         // accessToken抽象类会直接传进来
         return new QQImpl(accessToken, appId);
     }
-
 
 }
