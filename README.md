@@ -22,8 +22,8 @@
     记住我功能的实现
 7.  security-sso-oauth2  
     基于oauth2的`authorization_code`模式的单点登录
-8.  security-weixin  
-    TODO 整合微信登陆
+8.  security-social
+    整合QQ微信登陆
     
     
         
