@@ -1,5 +1,6 @@
 package com.fulinlin.config;
 
+import com.fulinlin.social.processor.SocialAuthenticationFilterPostProcessor;
 import com.fulinlin.social.support.MySpringSocialConfigurer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -30,6 +31,10 @@ public class SocialConfig extends SocialConfigurerAdapter {
 
     @Autowired(required = false)
     private ConnectionSignUp connectionSignUp;
+
+
+    @Autowired(required = false)
+    private SocialAuthenticationFilterPostProcessor socialAuthenticationFilterPostProcessor;
 
     /**
      * 关联用户登陆的持久化
@@ -65,6 +70,7 @@ public class SocialConfig extends SocialConfigurerAdapter {
         MySpringSocialConfigurer configurer = new MySpringSocialConfigurer("/login");
         // 如果实现了connectionSignUp 就不会跳到 注册页面
         // 如果找不到用户 就跳到登陆页面
+        configurer.setSocialAuthenticationFilterPostProcessor(socialAuthenticationFilterPostProcessor);
         configurer.signupUrl("/registered");
         return configurer;
     }

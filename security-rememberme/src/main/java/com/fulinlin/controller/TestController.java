@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * @create: 2019-05-13 16:41
  **/
 @Controller
-@RequestMapping
 public class TestController {
 
 
