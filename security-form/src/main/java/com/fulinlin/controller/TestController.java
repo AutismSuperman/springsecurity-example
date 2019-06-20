@@ -21,11 +21,6 @@ public class TestController {
 
     @RequestMapping("/login")
     public String login() {
-        System.out.println("11111");
-        System.out.println("11111");
-        System.out.println("11111");
-        System.out.println("11111");
-        System.out.println("11111");
         return "login";
     }
 }
