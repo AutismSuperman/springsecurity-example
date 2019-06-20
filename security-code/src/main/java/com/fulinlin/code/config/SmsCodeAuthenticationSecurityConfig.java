@@ -1,7 +1,6 @@
 package com.fulinlin.code.config;
 
-import com.fulinlin.code.authentication.CustomAuthenticationFailureHandler;
-import com.fulinlin.code.authentication.CustomAuthenticationSuccessHandler;
+import com.fulinlin.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.SecurityConfigurerAdapter;
@@ -15,15 +14,12 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class SmsCodeAuthenticationSecurityConfig extends SecurityConfigurerAdapter<DefaultSecurityFilterChain, HttpSecurity> {
-    private final UserDetailsService userDetailsService;
-    private final AuthenticationSuccessHandler customAuthenticationSuccessHandler;
-    private final AuthenticationFailureHandler customAuthenticationFailureHandler;
-
-    public SmsCodeAuthenticationSecurityConfig(UserDetailsService userDetailsService, AuthenticationSuccessHandler customAuthenticationSuccessHandler, AuthenticationFailureHandler customAuthenticationFailureHandler) {
-        this.userDetailsService = userDetailsService;
-        this.customAuthenticationSuccessHandler = customAuthenticationSuccessHandler;
-        this.customAuthenticationFailureHandler = customAuthenticationFailureHandler;
-    }
+    @Autowired
+    private UserService userService;
+    @Autowired
+    private AuthenticationSuccessHandler customAuthenticationSuccessHandler;
+    @Autowired
+    private AuthenticationFailureHandler customAuthenticationFailureHandler;
 
 
     @Override
@@ -34,7 +30,7 @@ public class SmsCodeAuthenticationSecurityConfig extends SecurityConfigurerAdapt
         smsCodeAuthenticationFilter.setAuthenticationFailureHandler(customAuthenticationFailureHandler);
 
         SmsCodeAuthenticationProvider smsCodeAuthenticationProvider = new SmsCodeAuthenticationProvider();
-        smsCodeAuthenticationProvider.setUserDetailsService(userDetailsService);
+        smsCodeAuthenticationProvider.setUserDetailsService(userService);
 
         http.authenticationProvider(smsCodeAuthenticationProvider)
                 .addFilterAfter(smsCodeAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);

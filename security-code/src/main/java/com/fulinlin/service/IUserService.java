@@ -1,7 +1,7 @@
 package com.fulinlin.service;
 
-import com.fulinlin.pojo.User;
+import com.fulinlin.pojo.SysUser;
 
 public interface IUserService {
-    User findByUsername(String userName);
+    SysUser findByUsername(String userName);
 }

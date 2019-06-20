@@ -1,6 +1,6 @@
 package com.fulinlin.service.impl;
 
-import com.fulinlin.pojo.User;
+import com.fulinlin.pojo.SysUser;
 import com.fulinlin.service.IUserService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
@@ -17,17 +17,17 @@ import java.util.Set;
 @Service
 public class UserServiceImpl implements IUserService {
 
-    private static final Set<User> users = new HashSet<>();
+    private static final Set<SysUser> users = new HashSet<>();
 
 
     static {
-        users.add(new User(1L, "13103779727", "1dc568b64c0f67e7a86c89a12fa5bd5f", Arrays.asList("admin", "docker")));
-        users.add(new User(1L, "13937737784", "1dc568b64c0f67e7a86c89a12fa5bd5f", Arrays.asList("admin", "docker")));
-        users.add(new User(1L, "13113111414", "1dc568b64c0f67e7a86c89a12fa5bd5f", Arrays.asList("admin", "docker")));
+        users.add(new SysUser(1L, "fulin", "123456", Arrays.asList("ROLE_ADMIN", "ROLE_DOCKER")));
+        users.add(new SysUser(2L, "xiaohan", "123456", Arrays.asList("ROLE_ADMIN", "ROLE_DOCKER")));
+        users.add(new SysUser(3L, "longlong", "123456", Arrays.asList("ROLE_ADMIN", "ROLE_DOCKER")));
     }
 
     @Override
-    public User findByUsername(String userName) {
-        return users.stream().filter(o -> StringUtils.equals(o.getUsername(), userName)).findFirst().get();
+    public SysUser findByUsername(String userName) {
+        return users.stream().filter(o -> StringUtils.equals(o.getUserName(), userName)).findFirst().orElse(new SysUser());
     }
 }
