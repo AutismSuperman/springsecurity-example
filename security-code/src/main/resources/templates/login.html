@@ -83,6 +83,7 @@
             alert("用户名或密码不能为空");
             return;
         }
+        debugger
         $.ajax({
             type: "POST",
             url: "/authentication/form",
@@ -98,8 +99,6 @@
                 }, 500);
             },
             error: function (e,a,b) {
-                console.log(a);
-                console.log(b);
                 console.log(e.responseText);
                 alert("登陆失败zxczxczc")
             }

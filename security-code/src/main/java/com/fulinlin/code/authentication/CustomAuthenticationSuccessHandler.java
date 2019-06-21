@@ -22,6 +22,7 @@ public class CustomAuthenticationSuccessHandler extends SavedRequestAwareAuthent
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException {
         log.info("登录成功");
+        response.setStatus(HttpStatus.OK.value());
         ModelMap modelMap = GenerateModelMap.generateMap(HttpStatus.OK.value(), "登录成功");
         response.setContentType("application/json;charset=UTF-8");
         response.getWriter().write(JSON.toJSONString(modelMap));

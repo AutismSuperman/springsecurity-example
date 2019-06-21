@@ -22,6 +22,7 @@ public class CustomAuthenticationFailureHandler extends SimpleUrlAuthenticationF
     @Override
     public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException, ServletException {
         log.info("登录失败！");
+        response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
         ModelMap modelMap = GenerateModelMap.generateMap(HttpStatus.INTERNAL_SERVER_ERROR.value(), "验证失败");
         response.setContentType("application/json;charset=UTF-8");
         response.getWriter().write(JSON.toJSONString(modelMap));

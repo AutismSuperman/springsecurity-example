@@ -22,10 +22,10 @@ public class SuccessAuthenticationHandler implements AuthenticationSuccessHandle
     }
 
     @Override
-    public void onAuthenticationSuccess(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Authentication authentication) throws IOException, ServletException {
+    public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
         log.info("登录成功");
-        httpServletResponse.setStatus(HttpStatus.OK.value());
-        httpServletResponse.setContentType("application/json;charset=UTF-8");
-        httpServletResponse.getWriter().write(objectMapper.writeValueAsString(authentication));
+        response.setStatus(HttpStatus.OK.value());
+        response.setContentType("application/json;charset=UTF-8");
+        response.getWriter().write(objectMapper.writeValueAsString(authentication));
     }
 }

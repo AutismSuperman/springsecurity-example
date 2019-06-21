@@ -54,9 +54,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .authorizeRequests()
                 // 如果有允许匿名的url，填在下面
-                .antMatchers("/sms/**", "/authentication/form").permitAll()
+                .antMatchers("/login","/sms/**", "/authentication/form").permitAll()
                 .anyRequest().authenticated();
-
 
         // 关闭CSRF跨域
         http.csrf().disable();
