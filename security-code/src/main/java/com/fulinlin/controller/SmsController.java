@@ -18,13 +18,14 @@ import java.util.Map;
 public class SmsController {
 
     @RequestMapping("/sms/code")
-    public void sms(String mobile, HttpSession session) {
+    public String sms(String mobile, HttpSession session) {
         int code = (int) Math.ceil(Math.random() * 9000 + 1000);
         Map<String, Object> map = new HashMap<>(16);
         map.put("mobile", mobile);
         map.put("code", code);
         session.setAttribute("smsCode", map);
         log.info("{}：为 {} 设置短信验证码：{}", session.getId(), mobile, code);
+        return "你的验证码是code";
     }
 
 

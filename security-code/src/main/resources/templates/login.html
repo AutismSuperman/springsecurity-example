@@ -9,11 +9,11 @@
 <table>
     <tr>
         <td>用户名:</td>
-        <td><input type="text" name="mobile"></td>
+        <td><input type="text" autocomplete="off" name="mobile"></td>
     </tr>
     <tr>
         <td>验证码:</td>
-        <td><input type="password" name="sms_code"></td>
+        <td><input type="password" autocomplete="off" name="sms_code"></td>
     </tr>
     <tr>
         <td colspan="2">
@@ -26,11 +26,11 @@
 <table>
     <tr>
         <td>用户名:</td>
-        <td><input type="text" name="username"></td>
+        <td><input type="text" autocomplete="off" name="username"></td>
     </tr>
     <tr>
         <td>密码:</td>
-        <td><input type="password" name="password"></td>
+        <td><input type="password" autocomplete="off" name="password"></td>
     </tr>
     <tr>
         <td colspan="2">
@@ -42,7 +42,8 @@
 <script>
 
     function sendSms() {
-        window.location.href = '/sms/code?mobile=' +  $("input[name=mobile]").val();
+        window.open('/sms/code?mobile=' +  $("input[name=mobile]").val(),"_blank")
+        window.location.href = ;
     }
     
     function loginSms() {
