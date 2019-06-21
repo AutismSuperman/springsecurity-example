@@ -6,6 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler;
+import org.springframework.stereotype.Component;
 import org.springframework.ui.ModelMap;
 
 import javax.servlet.ServletException;
@@ -16,6 +17,7 @@ import java.io.IOException;
 /**
  * 自定义失败处理器
  */
+@Component
 @Slf4j
 public class CustomAuthenticationFailureHandler extends SimpleUrlAuthenticationFailureHandler {
 

@@ -28,6 +28,6 @@ public class UserServiceImpl implements IUserService {
 
     @Override
     public SysUser findByUsername(String userName) {
-        return users.stream().filter(o -> StringUtils.equals(o.getUserName(), userName)).findFirst().orElse(new SysUser());
+        return users.stream().filter(o -> StringUtils.equals(o.getUserName(), userName)).findFirst().orElse(null);
     }
 }

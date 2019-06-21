@@ -25,7 +25,7 @@ public class SmsController {
         map.put("code", code);
         session.setAttribute("smsCode", map);
         log.info("{}：为 {} 设置短信验证码：{}", session.getId(), mobile, code);
-        return "你的验证码是code";
+        return "你的手机号"+mobile+"验证码是"+code;
     }
 
 

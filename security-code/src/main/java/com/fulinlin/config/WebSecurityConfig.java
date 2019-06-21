@@ -1,5 +1,7 @@
 package com.fulinlin.config;
 
+import com.fulinlin.code.authentication.CustomAuthenticationFailureHandler;
+import com.fulinlin.code.authentication.CustomAuthenticationSuccessHandler;
 import com.fulinlin.code.config.SmsCodeAuthenticationSecurityConfig;
 import com.fulinlin.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,15 +15,16 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    private  SmsCodeAuthenticationSecurityConfig smsCodeAuthenticationSecurityConfig;
+    private CustomAuthenticationFailureHandler customAuthenticationFailureHandler;
     @Autowired
-    private  UserService userService;
-
-
+    private CustomAuthenticationSuccessHandler customAuthenticationSuccessHandler;
+    @Autowired
+    private SmsCodeAuthenticationSecurityConfig smsCodeAuthenticationSecurityConfig;
+    @Autowired
+    private UserService userService;
 
 
     @Override
@@ -43,18 +46,23 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.apply(smsCodeAuthenticationSecurityConfig)
-                .and()
-                .formLogin()
+        //表单登陆配置
+        http.formLogin()
+                .failureHandler(customAuthenticationFailureHandler)
+                .successHandler(customAuthenticationSuccessHandler)
                 .loginPage("/login")
                 .loginProcessingUrl("/authentication/form")
+                .and();
+
+
+        http.apply(smsCodeAuthenticationSecurityConfig)
                 .and()
                 .logout()
                 .logoutUrl("/logout")
                 .and()
                 .authorizeRequests()
                 // 如果有允许匿名的url，填在下面
-                .antMatchers("/login","/sms/**", "/authentication/form").permitAll()
+                .antMatchers("/login", "/sms/**", "/authentication/form").permitAll()
                 .anyRequest().authenticated();
 
         // 关闭CSRF跨域
