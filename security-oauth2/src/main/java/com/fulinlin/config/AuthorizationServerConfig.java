@@ -1,9 +1,12 @@
 package com.fulinlin.config;
 
 import com.fulinlin.service.MyUserDetailsService;
+import org.omg.CORBA.PERSIST_STORE;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
@@ -27,13 +30,18 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     private MyUserDetailsService myUserDetailsService;
     @Autowired
     private TokenStore jwtTokenStore;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Autowired
     private JwtAccessTokenConverter jwtAccessTokenConverter;
 
     @Override
     public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
-        super.configure(security);
+        security
+                .tokenKeyAccess("permitAll()")
+                .checkTokenAccess("permitAll()")
+                .allowFormAuthenticationForClients();
     }
 
     /**
@@ -50,7 +58,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
         clients.inMemory().withClient("fulin")
-                .secret("fulinlin")
+                .secret(passwordEncoder.encode("fulinlin"))
                 //token有效时间 2小时
                 .accessTokenValiditySeconds(72000)
                 //密码授权模式和刷新令牌
@@ -61,6 +69,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
+
         endpoints
                 .tokenStore(jwtTokenStore)
                 .accessTokenConverter(jwtAccessTokenConverter)

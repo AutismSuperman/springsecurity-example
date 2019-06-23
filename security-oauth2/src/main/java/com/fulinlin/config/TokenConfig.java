@@ -33,16 +33,16 @@ public class TokenConfig {
 
     }
 
-//    @Configuration
-//    public static class RedisTokenConfig {
-//        @Autowired
-//        private RedisConnectionFactory redisConnectionFactory;
-//
-//        public TokenStore redisTokenStore() {
-//            //这里设置 jwt的密签
-//            return new RedisTokenStore(redisConnectionFactory);
-//        }
-//    }
+   /* @Configuration //redis的方式
+   public static class RedisTokenConfig {
+       @Autowired
+       private RedisConnectionFactory redisConnectionFactory;
+
+       public TokenStore redisTokenStore() {
+           //
+           return new RedisTokenStore(redisConnectionFactory);
+       }
+   }*/
 }
 
 

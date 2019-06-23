@@ -2,6 +2,7 @@ package com.fulinlin.config;
 
 import com.fulinlin.authentication.FailureAuthenticationHandler;
 import com.fulinlin.authentication.SuccessAuthenticationHandler;
+import com.fulinlin.exception.Auth2ResponseExceptionTranslator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -12,6 +13,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configurers.ResourceServerSecurityConfigurer;
+import org.springframework.security.oauth2.provider.error.OAuth2AuthenticationEntryPoint;
+import org.springframework.security.web.AuthenticationEntryPoint;
 
 /**
  * @program: SpringSecurity
@@ -41,9 +44,8 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
                 .successHandler(successAuthenticationHandler)
                 .failureHandler(failureAuthenticationHandler);
 
-
         http.authorizeRequests()
-                .antMatchers("/oauth/token").permitAll()
+                .antMatchers("/oauth/**").permitAll()
                 .anyRequest()
                 .authenticated()
                 .and()
@@ -53,7 +55,9 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 
     @Override
     public void configure(ResourceServerSecurityConfigurer resources) throws Exception {
-        super.configure(resources);
+        OAuth2AuthenticationEntryPoint authenticationEntryPoint = new OAuth2AuthenticationEntryPoint();
+        authenticationEntryPoint.setExceptionTranslator(new Auth2ResponseExceptionTranslator());
+        resources.authenticationEntryPoint(authenticationEntryPoint);
     }
 
 }

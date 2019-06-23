@@ -8,6 +8,7 @@ import org.bouncycastle.util.encoders.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.common.OAuth2AccessToken;
 import org.springframework.security.oauth2.common.exceptions.UnapprovedClientAuthenticationException;
 import org.springframework.security.oauth2.provider.*;
@@ -40,6 +41,8 @@ public class SuccessAuthenticationHandler extends SavedRequestAwareAuthenticatio
 
     @Autowired
     private AuthorizationServerTokenServices jwkTokenServices;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Autowired
     private ClientDetailsService clientDetailsService;
@@ -66,7 +69,7 @@ public class SuccessAuthenticationHandler extends SavedRequestAwareAuthenticatio
         if (clientDetails == null) {
             throw new UnapprovedClientAuthenticationException("clientId 不存在" + clientId);
             //判断  自己的clientid和 clientsecret  是否一致
-        } else if (!StringUtils.equals(clientDetails.getClientSecret(), clientSecret)) {
+        } else if (!passwordEncoder.matches(clientSecret,clientDetails.getClientSecret())) {
             throw new UnapprovedClientAuthenticationException("clientSecret 不匹配" + clientId);
         }
         //密码授权 模式, 组建 authentication

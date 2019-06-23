@@ -1,3 +1,4 @@
+
 spring:
   main:
     allow-bean-definition-overriding: true
@@ -6,4 +7,6 @@ spring:
       name: user
       password: admin
       roles: user, admin
-
+logging:
+  level:
+    root: info
