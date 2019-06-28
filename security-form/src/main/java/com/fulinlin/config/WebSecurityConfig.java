@@ -78,6 +78,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         "/authentication/form").permitAll()// 这些页面不需要身份认证,其他请求需要认证
                 .anyRequest() // 任何请求
                 .authenticated()//; // 都需要身份认证
+                .and().rememberMe().
+                rememberMeCookieName("reberm")
+                .tokenValiditySeconds(3600)
                 .and()
                 .csrf().disable();// 禁用跨站攻击
     }

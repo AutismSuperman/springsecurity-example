@@ -22,6 +22,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private final FailureAuthenticationHandler failureAuthenticationHandler;
     private final SuccessAuthenticationHandler successAuthenticationHandler;
 
+
     private final PersistentTokenRepository persistentTokenRepository;
 
     private final UserService userService;
@@ -90,7 +91,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         "/authentication/form")
                 .permitAll() .anyRequest().authenticated()
 //                .and().rememberMe().rememberMeCookieName("reberm").tokenValiditySeconds(3600)  //使用 cookie的形势去做记住我
-                .and().rememberMe().tokenValiditySeconds(3600).tokenRepository(persistentTokenRepository).userDetailsService(userService)
+                .and().rememberMe().tokenValiditySeconds(3600)
+                .tokenRepository(persistentTokenRepository)
+                .userDetailsService(userService)
                 .and()
                 .csrf().disable();// 禁用跨站攻击
     }

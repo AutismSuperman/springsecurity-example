@@ -1,7 +1,9 @@
 package com.fulinlin.service;
 
+import com.fulinlin.init.InitData;
 import com.fulinlin.pojo.SysRole;
 import com.fulinlin.pojo.SysUser;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -17,15 +19,10 @@ import java.util.List;
 @Service
 public class UserService implements UserDetailsService {
 
-    private final IUserService iUserService;
-
-    public UserService(IUserService iUserService) {
-        this.iUserService = iUserService;
-    }
 
     @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
-        SysUser sysUser = iUserService.findByUsername(s);
+        SysUser sysUser = InitData.SYS_USERS.stream().filter(o -> StringUtils.equals(o.getUserName(), s)).findFirst().orElse(null);
         if (sysUser == null) {
             throw new UsernameNotFoundException("用户不存在");
         }
@@ -37,5 +34,7 @@ public class UserService implements UserDetailsService {
         }
         return new User(sysUser.getUserName(), sysUser.getPassword(), authorities);
     }
+
+
 
 }

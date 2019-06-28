@@ -20,7 +20,7 @@ public class PermissionController {
         return "说明你有docker权限";
     }
     @RequestMapping("/custom")
-    @PreAuthorize("@testService.check('user')")
+    @PreAuthorize("@testPermissionEvaluator.check('user')")
     public String test0() {
         return "说明你有自定义权限";
     }

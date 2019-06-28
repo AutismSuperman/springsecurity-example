@@ -5,8 +5,6 @@ import com.fulinlin.authentication.CustomPermissionEvaluator;
 import com.fulinlin.authentication.FailureAuthenticationHandler;
 import com.fulinlin.authentication.SuccessAuthenticationHandler;
 import com.fulinlin.service.UserService;
-import com.fulinlin.util.MD5Util;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -21,7 +19,7 @@ import org.springframework.security.web.access.expression.DefaultWebSecurityExpr
 
 @Configuration
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(prePostEnabled = true)
+@EnableGlobalMethodSecurity(prePostEnabled = true,securedEnabled=true,jsr250Enabled=true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     /*
@@ -44,7 +42,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
      *      @PreAuthorize("hasRole('ADMIN') AND hasRole('DBA')")
      *
      * ================================================
-     * secureEnabled=true : 启用 Spring Security 安全注释
+     * securedEnabled=true : 启用 Spring Security 安全注释
      * 主要注解
      * @Secured
      *
@@ -120,15 +118,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userService).passwordEncoder(
                 new PasswordEncoder() {
-
                     @Override
-                    public String encode(CharSequence rawPassword) {
-                        return MD5Util.encode((String) rawPassword);
+                    public String encode(CharSequence charSequence) {
+                        return charSequence.toString();
                     }
 
                     @Override
-                    public boolean matches(CharSequence rawPassword, String encodedPassword) {
-                        return encodedPassword.equals(MD5Util.encode((String) rawPassword));
+                    public boolean matches(CharSequence charSequence, String s) {
+                        return s.equals(charSequence.toString());
                     }
                 });
     }

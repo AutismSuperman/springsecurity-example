@@ -3,6 +3,8 @@ package com.fulinlin.service.impl;
 import com.fulinlin.pojo.User;
 import com.fulinlin.service.IUserService;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
@@ -19,7 +21,6 @@ public class UserServiceImpl implements IUserService {
 
     private static final Set<User> users = new HashSet<>();
 
-
     static {
         users.add(new User(1L, "fulin", "1dc568b64c0f67e7a86c89a12fa5bd5f", Arrays.asList("admin", "docker")));
         users.add(new User(1L, "xiaohan", "1dc568b64c0f67e7a86c89a12fa5bd5f", Arrays.asList("admin", "docker")));
@@ -28,6 +29,7 @@ public class UserServiceImpl implements IUserService {
 
     @Override
     public User findByUsername(String userName) {
+
         return users.stream().filter(o -> StringUtils.equals(o.getUsername(), userName)).findFirst().get();
     }
 }

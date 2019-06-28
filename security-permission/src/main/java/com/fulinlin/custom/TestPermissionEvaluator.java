@@ -7,6 +7,6 @@ import org.springframework.security.core.Authentication;
  * @author: fulin
  * @create: 2019-05-30 00:02
  **/
-public interface TestService {
+public interface TestPermissionEvaluator {
      boolean check(String a);
 }
