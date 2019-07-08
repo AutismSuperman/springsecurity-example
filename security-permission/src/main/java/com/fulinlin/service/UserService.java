@@ -19,7 +19,6 @@ import java.util.List;
 @Service
 public class UserService implements UserDetailsService {
 
-
     @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
         SysUser sysUser = InitData.SYS_USERS.stream().filter(o -> StringUtils.equals(o.getUserName(), s)).findFirst().orElse(null);
@@ -34,7 +33,5 @@ public class UserService implements UserDetailsService {
         }
         return new User(sysUser.getUserName(), sysUser.getPassword(), authorities);
     }
-
-
 
 }

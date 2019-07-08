@@ -28,10 +28,11 @@ public class AccessDeniedAuthenticationHandler implements AccessDeniedHandler {
 
 
     @Override
-    public void handle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, AccessDeniedException e) throws IOException, ServletException {
+    public void handle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, AccessDeniedException e) throws IOException {
         log.info("没有权限");
         httpServletResponse.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
         httpServletResponse.setContentType("application/json;charset=UTF-8");
         httpServletResponse.getWriter().write(objectMapper.writeValueAsString(e.getMessage()));
     }
+
 }

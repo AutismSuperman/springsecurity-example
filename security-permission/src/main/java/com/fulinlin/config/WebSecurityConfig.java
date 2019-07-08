@@ -19,7 +19,7 @@ import org.springframework.security.web.access.expression.DefaultWebSecurityExpr
 
 @Configuration
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(prePostEnabled = true,securedEnabled=true,jsr250Enabled=true)
+//@EnableGlobalMethodSecurity(prePostEnabled = true,securedEnabled=true,jsr250Enabled=true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     /*
@@ -152,4 +152,38 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .csrf().disable();// 禁用跨站攻击
     }
+
+//    @Override
+//    protected void configure(HttpSecurity http) throws Exception {
+//        //http.httpBasic()  //httpBasic 登录
+//        http.formLogin()
+//                .failureHandler(failureAuthenticationHandler) // 自定义登录失败处理
+//                .successHandler(successAuthenticationHandler) // 自定义登录成功处理
+//                .and()
+//                .logout()
+//                .logoutUrl("/logout")
+//                .and()
+//                .formLogin()
+//                .loginPage("/login")
+//                .loginProcessingUrl("/authentication/form") // 自定义登录路径
+//                .and()
+//                .authorizeRequests()// 对请求授权
+//                .antMatchers("/login", "/authentication/require",
+//                        "/authentication/form").permitAll()// 这些页面不需要身份认证,其他请求需要认证
+//                .antMatchers("/docker").hasRole("DOCKER")
+//                .antMatchers("/java").hasRole("JAVA")
+//                .antMatchers("/java").hasRole("JAVA")
+//                .antMatchers("/custom")
+//                .access("@testPermissionEvaluator.check(authentication)")
+//                .antMatchers("/custom")
+//                .access("hasRole('JAVA') or  hasRole('DOCKER')")
+//                .anyRequest()
+//                .authenticated()
+//                .and()
+//                .csrf().disable();// 禁用跨站攻击
+//    }
+
+
+
+
 }
