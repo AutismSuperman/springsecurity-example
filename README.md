@@ -39,8 +39,6 @@
 3. 提交代码
 4. 新建 Pull Request
 
-#### 码云特技
-
 注意：代码中有很多不全的地方，详细的请参考
 CSDN博客:https://blog.csdn.net/qq_32867467
 个人博客网站: www.fulinlin.com
