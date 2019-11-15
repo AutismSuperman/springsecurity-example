@@ -8,21 +8,23 @@
 
 #### 使用说明
 
-1.  security-code              
+-  security-code              
     整合短信验证码(可以稍微改造为图形验证码)
-2.  security-form              
+-  security-form              
     表单登陆
-3.  security-jwt          
+-  security-jwt          
     使用jwt代替原有的session并整合`reids`作为jwt的存储
-4.  security-oauth2  
+-  security-oauth2  
     整合oauth2的`password`模式适合
-5.  security-permission  
+-  security-permission  
     security的鉴权里面有自定义鉴权和注解鉴权的例子
-6.  security-rememberme  
+-  security-dynamic-permission 
+    security动态鉴权的例子
+-  security-rememberme  
     记住我功能的实现
-7.  security-sso-oauth2  
+-  security-sso-oauth2  
     基于oauth2的`authorization_code`模式的单点登录
-8.  security-social
+-  security-social
     整合QQ微信登陆
     
     

@@ -1,0 +1,23 @@
+
+
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  freemarker:
+    request-context-attribute: request
+    suffix: .html
+    content-type: text/html
+    enabled: true
+    cache: false
+    template-loader-path: classpath:/templates/
+    charset: UTF-8
+    settings:
+      number_format: '0.##'
+  security:
+    user:
+      name: user
+      password: admin
+      roles: user, admin
+logging:
+  level:
+    org.springframework.security.web: info

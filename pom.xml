@@ -27,6 +27,7 @@
         <module>security-oauth2</module>
         <module>security-sso-oauth2</module>
         <module>security-social</module>
+        <module>security-dynamic-permission</module>
     </modules>
 
     <dependencies>
