@@ -23,12 +23,17 @@ public class DynamicFilterInvocationSecurityMetadataSource implements FilterInvo
 
     public DynamicFilterInvocationSecurityMetadataSource(FilterInvocationSecurityMetadataSource expressionBasedFilterInvocationSecurityMetadataSource) {
         this.superMetadataSource = expressionBasedFilterInvocationSecurityMetadataSource;
+        //TODO 在这里去查询你的数据库
     }
 
     private final AntPathMatcher antPathMatcher = new AntPathMatcher();
 
+    /**
+     * 假设这就是从数据库中查询到的数据
+     * 意思就是 ROLE_JAVA 的角色 才能访问 /tt
+     */
     private final Map<String, String> urlRoleMap = new HashMap<String, String>() {{
-        put("/tt", "ROLE_JAVA1");
+        put("/tt", "ROLE_JAVA");
     }};
 
     @Override
@@ -40,7 +45,7 @@ public class DynamicFilterInvocationSecurityMetadataSource implements FilterInvo
                 return SecurityConfig.createList(entry.getValue());
             }
         }
-        //  返回代码定义的默认配置
+        //如果没有匹配到就拿 咱们自定义的配置
         return superMetadataSource.getAttributes(object);
     }
 
