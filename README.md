@@ -12,6 +12,8 @@
     整合短信验证码(可以稍微改造为图形验证码)
 -  security-form              
     表单登陆
+-  security-simple-jwt          
+    使用jwt代替原有的session    
 -  security-jwt          
     使用jwt代替原有的session并整合`reids`作为jwt的存储
 -  security-oauth2  

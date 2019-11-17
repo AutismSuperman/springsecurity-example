@@ -11,7 +11,7 @@
     <groupId>com.fulinlin</groupId>
     <artifactId>security-test</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>security-test</name>
+    <name>SpringSecurityProject</name>
     <description>Demo project for Spring Boot</description>
     <packaging>pom</packaging>
     <properties>
@@ -28,6 +28,7 @@
         <module>security-sso-oauth2</module>
         <module>security-social</module>
         <module>security-dynamic-permission</module>
+        <module>security-simple-jwt</module>
     </modules>
 
     <dependencies>
