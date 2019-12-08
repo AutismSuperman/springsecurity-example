@@ -29,9 +29,6 @@
 -  security-social
     整合QQ微信登陆
     
-    
-        
-
 
 
 #### 批评打脸
@@ -42,11 +39,11 @@
 4. 新建 Pull Request
 
 注意：代码中有很多不全的地方，详细的请参考
-CSDN博客:https://blog.csdn.net/qq_32867467
-个人博客网站: www.fulinlin.com
+- CSDN博客:https://blog.csdn.net/qq_32867467
+- 个人博客网站: www.fulinlin.com
 
 实在不行可以 -X-X  qq：1670245232
 
 #### 推荐
 学习security 推荐看一位慕课讲师的课 `jojozhai`
-这是他的网址  https://www.imooc.com/t/3554172
+- 这是他的网址  https://www.imooc.com/t/3554172
