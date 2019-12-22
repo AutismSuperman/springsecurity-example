@@ -9,6 +9,7 @@ public abstract class SocialFactoryAdapter extends SocialConfigurerAdapter {
     public SocialFactoryAdapter() {
     }
 
+    @Override
     public void addConnectionFactories(ConnectionFactoryConfigurer configurer, Environment environment) {
         configurer.addConnectionFactory(this.createConnectionFactory());
     }

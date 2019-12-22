@@ -1,10 +1,10 @@
 social:
   wx:
-    app-id:  1111
+    app-id:  101841584
     app-secret: 1111
   qq:
-    app-id:  1111
-    app-secret: 1111
+    app-id:  101841584
+    app-secret: 05b0d589c69bf35c78caea732cf1aab8
 
 
 spring:
