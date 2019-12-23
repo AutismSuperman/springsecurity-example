@@ -1,3 +1,4 @@
+
 social:
   wx:
     app-id:  101841584
@@ -28,4 +29,11 @@ spring:
       name: user
       password: admin
       roles: user, admin
-
+server:
+  port: 443
+  ssl:
+    key-store: classpath:server.keystore
+    key-alias: tomcat
+    enabled: true
+    key-store-password: wangle
+    key-store-type: JKS

@@ -38,7 +38,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .authorizeRequests()
                 // 如果有允许匿名的url，填在下面
-                .antMatchers("/login/**", "/registered").permitAll()
+                .antMatchers("/auth/**", "/login.html", "/registered").permitAll()
                 .anyRequest().authenticated()
         ;
         // 关闭CSRF跨域

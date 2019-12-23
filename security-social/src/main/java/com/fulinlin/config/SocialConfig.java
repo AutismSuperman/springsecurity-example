@@ -67,7 +67,7 @@ public class SocialConfig extends SocialConfigurerAdapter {
     public SpringSocialConfigurer mySpringSocialConfigurer() {
         // SocialAuthenticationFilter过滤器默认拦截的请求是/auth开头，这里获取自己配置的处理路径/login
         //然后你的认证地址就是 /login/qq  这个qq就是你设置的providerId
-        MySpringSocialConfigurer configurer = new MySpringSocialConfigurer("/login");
+        MySpringSocialConfigurer configurer = new MySpringSocialConfigurer("/auth");
         // 如果实现了connectionSignUp 就不会跳到 注册页面
         // 如果找不到用户 就跳到登陆页面
         configurer.setSocialAuthenticationFilterPostProcessor(socialAuthenticationFilterPostProcessor);

@@ -33,11 +33,15 @@ public class MySpringSocialConfigurer extends SpringSocialConfigurer {
         SocialAuthenticationFilter filter = (SocialAuthenticationFilter) super.postProcess(object);
         // SocialAuthenticationFilter过滤器默认拦截的请求是/auth开头，这里是修改为自己配置的
         //这里提出来后配置成功处理器
+        filter.setFilterProcessesUrl(filterProcessesUrl);
         if (socialAuthenticationFilterPostProcessor != null) {
             socialAuthenticationFilterPostProcessor.process(filter);
         }
         return (T) filter;
     }
+
+
+
 
     public String getFilterProcessesUrl() {
         return filterProcessesUrl;
