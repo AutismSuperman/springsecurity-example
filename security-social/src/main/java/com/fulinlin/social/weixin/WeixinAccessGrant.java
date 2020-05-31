@@ -1,6 +1,5 @@
 package com.fulinlin.social.weixin;
 
-import lombok.Data;
 import org.springframework.social.oauth2.AccessGrant;
 
 /**
@@ -14,7 +13,6 @@ import org.springframework.social.oauth2.AccessGrant;
  * @author fulin
  * @description
  */
-@Data
 public class WeixinAccessGrant extends AccessGrant {
 
     private static final long serialVersionUID = -7243374526633186782L;
@@ -27,5 +25,13 @@ public class WeixinAccessGrant extends AccessGrant {
 
     public WeixinAccessGrant(String accessToken, String scope, String refreshToken, Long expiresIn) {
         super(accessToken, scope, refreshToken, expiresIn);
+    }
+
+    public String getOpenId() {
+        return openId;
+    }
+
+    public void setOpenId(String openId) {
+        this.openId = openId;
     }
 }
