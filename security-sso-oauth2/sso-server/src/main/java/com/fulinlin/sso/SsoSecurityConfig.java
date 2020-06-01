@@ -58,13 +58,20 @@ public class SsoSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
-        http
-                .requestMatchers().antMatchers("/oauth/**", "/login/**", "/logout/**")
+        http.formLogin()
+                // 登录页面
+                .loginPage("/auth/login")
+                // 登录处理url
+                .loginProcessingUrl("/signin");
+
+        http.requestMatchers().antMatchers("/signin", "/auth/login", "/oauth/**", "/login/**", "/logout/**")
                 .and()
                 .authorizeRequests()
                 .antMatchers("/oauth/**").authenticated()
                 .and()
                 .formLogin().permitAll();
+
+        http.csrf().disable();
     }
 
 }
